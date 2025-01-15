@@ -31,7 +31,7 @@ def normalized_chi_square(y_true: np.ndarray, y_pred: np.ndarray, sigma: np.ndar
 
 def residual_stats(residuals: np.ndarray) -> Tuple[float, float]:
     """Calculate mean and standard deviation of residuals."""
-    return np.mean(residuals), np.std(residuals)
+    return np.mean(residuals), np.std(residuals, ddof=1)
 
 def rmse(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     """Calculate Root Mean Square Error (RMSE)."""
@@ -176,7 +176,7 @@ def generate_grouped_std(time_list, az_list, dataset_name, acquisition_frequency
 
     # Calcular média e desvio padrão
     mean_data = np.mean(interpolated_data, axis=0)
-    std_data = np.std(interpolated_data, axis=0)
+    std_data = np.std(interpolated_data, axis=0, ddof=1)
 
     data = np.column_stack((common_time, mean_data, std_data))
     np.savetxt(dataset_name+'_Grouped_Data.txt', data)
